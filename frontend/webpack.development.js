@@ -18,7 +18,7 @@ module.exports = merge(common, {
       {
         test: /\.(ts|tsx)$/i,
         exclude: /node_modules/,
-        use: "babel-loader",
+        use: "ts-loader",
       },
     ],
   },
