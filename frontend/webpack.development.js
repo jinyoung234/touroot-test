@@ -2,7 +2,6 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = merge(common, {
@@ -19,7 +18,7 @@ module.exports = merge(common, {
       {
         test: /\.(ts|tsx)$/i,
         exclude: /node_modules/,
-        use: "babel-loader",
+        use: "ts-loader",
       },
     ],
   },
@@ -32,6 +31,5 @@ module.exports = merge(common, {
       template: "./public/index.html",
     }),
     new SpeedMeasurePlugin(),
-    new ForkTsCheckerWebpackPlugin(),
   ],
 });
