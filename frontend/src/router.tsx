@@ -1,7 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import QueryErrorBoundary from "@components/common/ErrorBoundary/QueryErrorBoundary";
-import RouterErrorBoundary from "@components/common/ErrorBoundary/RouterErrorBoundary";
 import AppLayout from "@components/layout/AppLayout/AppLayout";
 import KakaoCallbackPage from "@components/pages/login/KakaoCallbackPage";
 import LoginPage from "@components/pages/login/LoginPage";
@@ -18,12 +16,10 @@ export const router = createBrowserRouter([
   {
     path: ROUTE_PATHS_MAP.root,
     element: <AppLayout />,
-    errorElement: <QueryErrorBoundary />,
     children: [
       {
         path: ROUTE_PATHS_MAP.root,
         element: <MainPage />,
-        errorElement: <RouterErrorBoundary />,
       },
       {
         path: ROUTE_PATHS_MAP.login,

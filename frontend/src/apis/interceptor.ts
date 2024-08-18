@@ -14,12 +14,12 @@ import { STORAGE_KEYS_MAP } from "@constants/storage";
 
 export const checkAccessToken = (
   config: InternalAxiosRequestConfig,
-  // accessToken: string | null,
+  accessToken: string | null,
 ) => {
-  // if (!accessToken) {
-  //   alert(ERROR_MESSAGE_MAP.api.login);
-  //   window.location.href = ROUTE_PATHS_MAP.login;
-  // }
+  if (!accessToken) {
+    alert(ERROR_MESSAGE_MAP.api.login);
+    window.location.href = ROUTE_PATHS_MAP.login;
+  }
 
   return config;
 };
@@ -39,7 +39,7 @@ export const handlePreviousRequest = (config: InternalAxiosRequestConfig) => {
   const user: UserResponse | null = JSON.parse(localStorage.getItem(STORAGE_KEYS_MAP.user) ?? "{}");
   let newConfig = { ...config };
 
-  newConfig = checkAccessToken(config);
+  newConfig = checkAccessToken(config, user?.accessToken ?? null);
   newConfig = setAuthorizationHeader(config, user?.accessToken ?? "");
 
   return newConfig;

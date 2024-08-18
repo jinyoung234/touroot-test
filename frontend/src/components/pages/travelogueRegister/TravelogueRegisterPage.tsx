@@ -103,15 +103,16 @@ const TravelogueRegisterPage = () => {
 
   const { saveTransformDetail } = useTravelTransformDetailContext();
 
-  if (!user?.accessToken) {
-    throw new Error(ERROR_MESSAGE_MAP.api.login);
-  }
-
   useEffect(() => {
+    if (!user?.accessToken) {
+      alert(ERROR_MESSAGE_MAP.api.login);
+      navigate(ROUTE_PATHS_MAP.login);
+    }
+
     return () => {
       saveTransformDetail(null);
     };
-  }, [saveTransformDetail]);
+  }, [user?.accessToken, navigate]);
 
   return (
     <>

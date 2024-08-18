@@ -12,11 +12,8 @@ import TravelogueCardSkeleton from "./TravelogueCard/skeleton/TravelogueCardSkel
 
 const MainPage = () => {
   const SKELETON_COUNT = 5;
-  const { travelogues, status, fetchNextPage, error } = useInfiniteTravelogues();
-
+  const { travelogues, status, fetchNextPage } = useInfiniteTravelogues();
   const { lastElementRef } = useIntersectionObserver(fetchNextPage);
-
-  if (error) throw error;
 
   return (
     <S.MainPageContentContainer>
