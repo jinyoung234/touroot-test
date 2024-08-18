@@ -2,8 +2,7 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const { EsbuildPlugin } = require("esbuild-loader");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "development",
@@ -17,38 +16,20 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: [/\.tsx?$/],
-        loader: "esbuild-loader",
-        options: {
-          loader: "tsx",
-          target: "es2020",
-          tsconfigRaw: require("./tsconfig.json"),
-        },
-      },
-      {
-        test: [/\.ts?$/],
-        loader: "esbuild-loader",
-        options: {
-          loader: "ts",
-          target: "es2020",
-          tsconfigRaw: require("./tsconfig.json"),
-        },
+        test: /\.(ts|tsx)$/i,
+        exclude: /node_modules/,
+        use: "babel-loader",
       },
     ],
   },
   optimization: {
-    minimizer: [
-      new EsbuildPlugin({
-        target: "es2020",
-        css: true,
-      }),
-    ],
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
     new SpeedMeasurePlugin(),
-    new ForkTsCheckerWebpackPlugin(),
   ],
 });
