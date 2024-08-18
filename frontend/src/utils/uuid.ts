@@ -4,4 +4,4 @@ export const isUUID = (uuid: string) => {
   return typeof uuid === "string" && UUID_VALIDATE_REGEXP.test(uuid);
 };
 
-console.log("z1");
+console.log("z11");
